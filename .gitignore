@@ -1,0 +1,24 @@
+# Laravel
+src/vendor/
+src/node_modules/
+src/.env
+
+# Vite
+src/public/fonts-manifest.dev.json
+
+# Docker
+.env
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Composer cache
+src/.composer/
