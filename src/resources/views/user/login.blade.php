@@ -25,9 +25,10 @@
             <i class="fas fa-bars ms-1"></i>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0">
-                <li class="nav-item"><a class="nav-link" href="#contact">Регистриция</a></li>
-            </ul>
+            <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0"></ul>
+            <div class="d-flex ms-lg-3">
+                <a href="{{ route('register') }}" class="btn btn-warning">Регистриция</a>
+            </div>
         </div>
     </div>
 </nav>
@@ -46,19 +47,35 @@
         <!-- To make this form functional, sign up at-->
         <!-- https://startbootstrap.com/solution/contact-forms-->
         <!-- to get an API token!-->
-        <form id="contactForm" data-sb-form-api-token="API_TOKEN">
+        <form id="contactForm" data-sb-form-api-token="API_TOKEN" action="{{ route('login.store') }}" method="post">
+            @csrf
             <div class="row align-items-stretch mb-5">
                 <div class="col-md-12">
                     <div class="form-group">
                         <!-- Email address input-->
-                        <input class="form-control" id="email" type="email" placeholder="Your Email *" data-sb-validations="required,email" />
-                        <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                        <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+                        <input class="form-control" id="email" type="email" name="email" value="{{ old('email') }}" placeholder="Your Email *" data-sb-validations="required,email" />
+                        @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                     <div class="form-group">
                         <!-- Phone number input-->
-                        <input class="form-control" id="password" type="password" placeholder="Enter password" data-sb-validations="required" />
-                        <div class="invalid-feedback" data-sb-feedback="phone:required">A phone number is required.</div>
+                        <input class="form-control" id="password" type="password" name="password" placeholder="Enter password" data-sb-validations="required" />
+                        @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="form-check mb-4">
+                        <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="remember"
+                                name="remember"
+                                value="1">
+                        <label class="form-check-label text-white" for="remember">
+                            Запомнить меня
+                        </label>
                     </div>
                 </div>
             </div>
@@ -80,7 +97,7 @@
             <!-- an error submitting the form-->
             <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
             <!-- Submit Button-->
-            <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled" id="submitButton" type="submit">Войти</button></div>
+            <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase" id="submitButton" type="submit">Войти</button></div>
         </form>
     </div>
 </section>
@@ -316,10 +333,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="{{ asset('user/js/scripts.js') }}"></script>
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-<!-- * *                               SB Forms JS                               * *-->
-<!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
 </html>

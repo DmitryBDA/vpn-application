@@ -34,6 +34,25 @@
                 <li class="nav-item"><a class="nav-link" href="#team">Team</a></li>
                 <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
             </ul>
+
+            <div class="d-flex ms-lg-3">
+                @guest
+                    <a href="{{ route('login') }}" class="btn btn-outline-light me-2">Войти</a>
+                    <a href="{{ route('register') }}" class="btn btn-warning">Регистрация</a>
+                @endguest
+
+                @auth
+                    <div class="d-flex align-items-center">
+                        <form action="{{ route('logout') }}" method="POST" class="m-0">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-light">
+                                Выйти
+                            </button>
+                        </form>
+                    </div>
+                @endauth
+
+            </div>
         </div>
     </div>
 </nav>
