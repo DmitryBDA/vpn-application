@@ -22,3 +22,6 @@ Thumbs.db
 
 # Composer cache
 src/.composer/
+# PHPStan
+src/storage/phpstan/
+/src/.phpunit.result.cache

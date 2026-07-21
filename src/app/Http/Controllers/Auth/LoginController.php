@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-
     public function create(): View
     {
         return view('user.login');
@@ -23,6 +22,9 @@ class LoginController extends Controller
         return redirect()->route('home');
     }
 
+    /**
+     * Авторизует пользователя
+     */
     public function store(LoginRequest $request): RedirectResponse
     {
         if (! Auth::attempt(

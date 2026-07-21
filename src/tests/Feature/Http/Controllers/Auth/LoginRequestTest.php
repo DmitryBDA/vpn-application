@@ -2,9 +2,6 @@
 
 namespace Http\Controllers\Auth;
 
-
-
-use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Tests\TestCase;
 
