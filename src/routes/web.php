@@ -1,14 +1,14 @@
 <?php
 
-use App\Http\Controllers\Admin\MainController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\User\UserIndexController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [UserIndexController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/admin', [MainController::class, 'index'])->middleware('auth')->name('admin.index');
+Route::get('/admin', [DashboardController::class, 'index'])->middleware('auth')->name('admin.index');
 
 Route::get('/register', [RegisterController::class, 'create'])->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
