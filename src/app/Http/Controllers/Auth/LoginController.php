@@ -15,7 +15,7 @@ class LoginController extends Controller
         return view('user.login');
     }
 
-    public function logout(): RedirectResponse
+    public function destroy(): RedirectResponse
     {
         Auth::logout();
 

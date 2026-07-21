@@ -8,12 +8,24 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/admin', [DashboardController::class, 'index'])->middleware('auth')->name('admin.index');
+Route::middleware('guest')->group(function () {
+    Route::controller(LoginController::class)->group(function () {
+        Route::get('/login', 'create')->name('login');
+        Route::post('/login', 'store')->name('login.store');
+    });
 
-Route::get('/register', [RegisterController::class, 'create'])->name('register');
-Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+    Route::controller(RegisterController::class)->group(function () {
+        Route::get('/register', 'create')->name('register');
+        Route::post('/register', 'store')->name('register.store');
+    });
+});
 
-Route::get('/login', [LoginController::class, 'create'])->name('login');
-Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::prefix('admin')
+        ->name('admin.')
+        ->group(function () {
+            Route::get('/', [DashboardController::class, 'index'])->name('index');
+        });
+});
