@@ -15,7 +15,7 @@ class LoginControllerTest extends TestCase
         $response = $this->get(route('login'));
 
         $response->assertOk();
-        $response->assertViewIs('user.login');
+        $response->assertViewIs('auth.login');
     }
 
     public function test_user_can_login(): void

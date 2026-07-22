@@ -15,7 +15,7 @@ class RegisterControllerTest extends TestCase
         $response = $this->get(route('register'));
 
         $response->assertOk();
-        $response->assertViewIs('user.register');
+        $response->assertViewIs('auth.register');
     }
 
     public function test_user_can_register(): void
